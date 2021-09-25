@@ -50,14 +50,6 @@ GAD_EXTERN GADAdSize const kGADAdSizeLeaderboard;
 /// 120x600.
 GAD_EXTERN GADAdSize const kGADAdSizeSkyscraper;
 
-/// An ad size that spans the full width of the application in portrait orientation. The height is
-/// typically 50 points on an iPhone/iPod UI, and 90 points tall on an iPad UI.
-GAD_EXTERN GADAdSize const kGADAdSizeSmartBannerPortrait;
-
-/// An ad size that spans the full width of the application in landscape orientation. The height is
-/// typically 32 points on an iPhone/iPod UI, and 90 points tall on an iPad UI.
-GAD_EXTERN GADAdSize const kGADAdSizeSmartBannerLandscape;
-
 /// An ad size that spans the full width of its container, with a height dynamically determined by
 /// the ad.
 GAD_EXTERN GADAdSize const kGADAdSizeFluid;
@@ -65,7 +57,40 @@ GAD_EXTERN GADAdSize const kGADAdSizeFluid;
 /// Invalid ad size marker.
 GAD_EXTERN GADAdSize const kGADAdSizeInvalid;
 
-#pragma mark Adaptive Sizes
+#pragma mark Inline Adaptive Sizes
+
+/// Returns a GADAdSize with the given width and the device's portrait height. This ad size
+/// allows Google servers to choose an optimal ad size less than or equal to the returned size. The
+/// exact size of the ad returned is passed through the banner's ad size delegate and is indicated
+/// by the banner's intrinsicContentSize. This ad size is most suitable for ads intended for scroll
+/// views.
+GAD_EXTERN GADAdSize GADPortraitInlineAdaptiveBannerAdSizeWithWidth(CGFloat width);
+
+/// Returns a GADAdSize with the given width and the device's landscape height. This ad size
+/// allows Google servers to choose an optimal ad size less than or equal to the returned size. The
+/// exact size of the ad returned is passed through the banner's ad size delegate and is indicated
+/// by the banner's intrinsicContentSize. This ad size is most suitable for ads intended for scroll
+/// views.
+GAD_EXTERN GADAdSize GADLandscapeInlineAdaptiveBannerAdSizeWithWidth(CGFloat width);
+
+/// Returns a GADAdSize with the given width and the device's height. This is a convenience
+/// function to return GADPortraitInlineAdaptiveBannerAdSizeWithWidth or
+/// GADLandscapeInlineAdaptiveBannerAdSizeWithWidth based on the current interface orientation.
+/// This function must be called on the main queue.
+GAD_EXTERN GADAdSize GADCurrentOrientationInlineAdaptiveBannerAdSizeWithWidth(CGFloat width);
+
+/// Returns a GADAdSize with the given width and max height. This ad size allows Google servers to
+/// choose an optimal ad size less than or equal to the returned size. The exact size of the ad
+/// returned is passed through the banner's ad size delegate and is indicated by the banner's
+/// intrinsicContentSize. This ad size is most suitable for ads intended for scroll views.
+///
+/// @param width The ad width.
+/// @param maxHeight The maximum height a loaded ad will have. Must be at least 32 px, but a max
+/// height of 50 px or higher is recommended.
+GAD_EXTERN GADAdSize GADInlineAdaptiveBannerAdSizeWithWidthAndMaxHeight(CGFloat width,
+                                                                        CGFloat maxHeight);
+
+#pragma mark Anchored Adaptive Sizes
 
 /// Returns a GADAdSize with the given width and a Google-optimized height to create a banner ad.
 /// The size returned has an aspect ratio similar to that of kGADAdSizeBanner, suitable for
@@ -126,11 +151,14 @@ GAD_EXTERN NSValue *_Nonnull NSValueFromGADAdSize(GADAdSize size);
 /// Returns a GADAdSize from an NSValue. Returns kGADAdSizeInvalid if the value is not a GADAdSize.
 GAD_EXTERN GADAdSize GADAdSizeFromNSValue(NSValue *_Nonnull value);
 
-#pragma mark Deprecated Macros
+#pragma mark Deprecated
 
-#define GAD_SIZE_320x50 CGSizeFromGADAdSize(kGADAdSizeBanner)
-#define GAD_SIZE_320x100 CGSizeFromGADAdSize(kGADAdSizeLargeBanner)
-#define GAD_SIZE_300x250 CGSizeFromGADAdSize(kGADAdSizeMediumRectangle)
-#define GAD_SIZE_468x60 CGSizeFromGADAdSize(kGADAdSizeFullBanner)
-#define GAD_SIZE_728x90 CGSizeFromGADAdSize(kGADAdSizeLeaderboard)
-#define GAD_SIZE_120x600 CGSizeFromGADAdSize(kGADAdSizeSkyscraper)
+/// An ad size that spans the full width of the application in portrait orientation. The height is
+/// typically 50 points on an iPhone/iPod UI, and 90 points tall on an iPad UI.
+GAD_EXTERN GADAdSize const kGADAdSizeSmartBannerPortrait
+    GAD_DEPRECATED_MSG_ATTRIBUTE("Use GADPortraitAnchoredAdaptiveBannerAdSizeWithWidth.");
+
+/// An ad size that spans the full width of the application in landscape orientation. The height is
+/// typically 32 points on an iPhone/iPod UI, and 90 points tall on an iPad UI.
+GAD_EXTERN GADAdSize const kGADAdSizeSmartBannerLandscape
+    GAD_DEPRECATED_MSG_ATTRIBUTE("Use GADLandscapeAnchoredAdaptiveBannerAdSizeWithWidth");
