@@ -7,6 +7,13 @@
 
 #import <GoogleMobileAds/GADAdLoader.h>
 
+/// Native ad image orientation preference.
+typedef NS_ENUM(NSInteger, GADNativeAdImageAdLoaderOptionsOrientation) {
+  GADNativeAdImageAdLoaderOptionsOrientationAny = 1,       ///< No orientation preference.
+  GADNativeAdImageAdLoaderOptionsOrientationPortrait = 2,  ///< Prefer portrait images.
+  GADNativeAdImageAdLoaderOptionsOrientationLandscape = 3  ///< Prefer landscape images.
+};
+
 /// Ad loader options for native ad image settings.
 @interface GADNativeAdImageAdLoaderOptions : GADAdLoaderOptions
 
@@ -17,5 +24,13 @@
 
 /// Indicates whether multiple images should be loaded for each asset. Defaults to NO.
 @property(nonatomic, assign) BOOL shouldRequestMultipleImages;
+
+#pragma mark - Deprecated
+
+/// Indicates preferred image orientation. Defaults to
+/// GADNativeAdImageAdLoaderOptionsOrientationAny.
+@property(nonatomic, assign)
+    GADNativeAdImageAdLoaderOptionsOrientation preferredImageOrientation DEPRECATED_MSG_ATTRIBUTE(
+        "Use the mediaAspectRatio property from GADNativeAdMediaAdLoaderOptions instead.");
 
 @end

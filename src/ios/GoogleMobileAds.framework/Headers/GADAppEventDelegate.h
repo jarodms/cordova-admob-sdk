@@ -2,13 +2,13 @@
 //  GADAppEventDelegate.h
 //  Google Mobile Ads SDK
 //
-//  Copyright 2020 Google LLC. All rights reserved.
+//  Copyright 2012 Google LLC. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
 @class GADBannerView;
-@class GADInterstitialAd;
+@class GADInterstitial;
 
 /// Implement your app event within these methods. The delegate will be notified when the SDK
 /// receives an app event message from the ad.
@@ -22,7 +22,7 @@
               withInfo:(nullable NSString *)info;
 
 /// Called when the interstitial receives an app event.
-- (void)interstitialAd:(nonnull GADInterstitialAd *)interstitialAd
+- (void)interstitial:(nonnull GADInterstitial *)interstitial
     didReceiveAppEvent:(nonnull NSString *)name
               withInfo:(nullable NSString *)info;
 
