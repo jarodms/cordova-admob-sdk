@@ -4,7 +4,7 @@ This plugin is intended to be a dependency of other plugins.
 
 ## Dependents
 
-* [cordova-plugin-admob-free](https://www.npmjs.com/package/cordova-plugin-admob-free)
+* [cordova-plugin-admob-free](https://github.com/jarodms/cordova-plugin-admob-free.git)
 
 ## Disclaimer
 
